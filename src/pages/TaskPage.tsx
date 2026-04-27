@@ -10,7 +10,7 @@ const TaskPage = () => {
       { isLoading ? 
         <p>Esta cargando data</p>
       : 
-        tasksList.map((task: Task) =>
+        tasksList?.map((task: Task) =>
           <div className="" key={task.id}>
             <p>{task.title}</p>
           </div>
