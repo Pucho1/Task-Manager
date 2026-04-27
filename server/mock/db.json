@@ -1,0 +1,94 @@
+{
+  "tasks": [
+    {
+      "id": "1",
+      "title": "Hacer la compra semanal",
+      "description": "Comprar frutas, verduras, carne y productos de limpieza",
+      "priority": "high",
+      "status": "pending",
+      "createdAt": "2026-04-20T09:00:00.000Z",
+      "updatedAt": "2026-04-20T09:00:00.000Z"
+    },
+    {
+      "id": "2",
+      "title": "Llamar al banco",
+      "description": "Consultar comisión de mantenimiento de la cuenta",
+      "priority": "medium",
+      "status": "in_progress",
+      "createdAt": "2026-04-20T10:30:00.000Z",
+      "updatedAt": "2026-04-21T08:00:00.000Z"
+    },
+    {
+      "id": "3",
+      "title": "Ir al gimnasio",
+      "description": "Entrenamiento de fuerza y 20 minutos de cardio",
+      "priority": "low",
+      "status": "done",
+      "createdAt": "2026-04-21T07:00:00.000Z",
+      "updatedAt": "2026-04-21T08:30:00.000Z"
+    },
+    {
+      "id": "4",
+      "title": "Preparar comida de la semana",
+      "description": "Cocinar varios platos para ahorrar tiempo entre semana",
+      "priority": "high",
+      "status": "pending",
+      "createdAt": "2026-04-21T18:00:00.000Z",
+      "updatedAt": "2026-04-21T18:00:00.000Z"
+    },
+    {
+      "id": "5",
+      "title": "Limpiar la casa",
+      "description": "Aspirar, fregar el suelo y limpiar el baño",
+      "priority": "medium",
+      "status": "in_progress",
+      "createdAt": "2026-04-22T09:00:00.000Z",
+      "updatedAt": "2026-04-22T11:00:00.000Z"
+    },
+    {
+      "id": "6",
+      "title": "Responder correos pendientes",
+      "description": "Revisar y contestar emails importantes",
+      "priority": "high",
+      "status": "pending",
+      "createdAt": "2026-04-22T12:00:00.000Z",
+      "updatedAt": "2026-04-22T12:00:00.000Z"
+    },
+    {
+      "id": "7",
+      "title": "Ver una película",
+      "description": "Elegir una película y desconectar un rato",
+      "priority": "low",
+      "status": "done",
+      "createdAt": "2026-04-22T21:00:00.000Z",
+      "updatedAt": "2026-04-22T23:00:00.000Z"
+    },
+    {
+      "id": "8",
+      "title": "Organizar escritorio",
+      "description": "Ordenar papeles y limpiar la zona de trabajo",
+      "priority": "low",
+      "status": "pending",
+      "createdAt": "2026-04-23T10:00:00.000Z",
+      "updatedAt": "2026-04-23T10:00:00.000Z"
+    },
+    {
+      "id": "9",
+      "title": "Pagar facturas",
+      "description": "Electricidad, internet y agua",
+      "priority": "high",
+      "status": "in_progress",
+      "createdAt": "2026-04-23T15:00:00.000Z",
+      "updatedAt": "2026-04-23T16:30:00.000Z"
+    },
+    {
+      "id": "10",
+      "title": "Quedar con amigos",
+      "description": "Organizar cena o salida el fin de semana",
+      "priority": "medium",
+      "status": "pending",
+      "createdAt": "2026-04-24T17:00:00.000Z",
+      "updatedAt": "2026-04-24T17:00:00.000Z"
+    }
+  ]
+}
