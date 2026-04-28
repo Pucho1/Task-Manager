@@ -7,7 +7,7 @@ const TaskPage = () => {
   const { tasksList, isLoading } = useTasks();
 
   return (
-    <section className=" text-white p-4">
+    <section className=" text-white">
       { isLoading ? 
         <p>Esta cargando data</p>
       : 
@@ -16,6 +16,8 @@ const TaskPage = () => {
           <TaskCard
             key={task.id}
             task={task}
+            onEdit={() => console.log('Editar tarea', task.id)}
+            onDelete={() => console.log('Eliminar tarea', task.id)}
           />
         )
       }
