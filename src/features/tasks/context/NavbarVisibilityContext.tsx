@@ -3,30 +3,24 @@ import { createContext, useContext, useState } from "react";
 import type { Position } from "./navbar-visibility.types";
 
 const defaultPosition: Position = {
-  x: 0,
-  y: 0,
   navIsVisible: false,
   setNavIsVisible: () => {},
-  setPosition: () => {},
 };
 
-export const PositionContext =  createContext<Position>(defaultPosition);
+export const NavbarVisibilityContext =  createContext<Position>(defaultPosition);
 
-export const PositionProvider = ({ children }: { children: React.ReactNode }) => {
+export const NavbarVisibilityProvider = ({ children }: { children: React.ReactNode }) => {
 
-  const [position, setPosition] = useState({ x: window.scrollX, y: window.scrollY });
 
   const [navIsVisible, setNavIsVisible] = useState(false);
 
-  
-
   return (
-    <PositionContext.Provider value={{ ...position, navIsVisible, setNavIsVisible, setPosition }}>
+    <NavbarVisibilityContext.Provider value={{  navIsVisible, setNavIsVisible }}>
       {children}
-    </PositionContext.Provider>
+    </NavbarVisibilityContext.Provider>
   );
 };
 
 export function usePositionStore() {
-  return useContext(PositionContext);
+  return useContext(NavbarVisibilityContext);
 };

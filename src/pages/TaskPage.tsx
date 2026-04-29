@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import TaskCard                 from "../features/tasks/components/TaskCard";
-import { useTasks }             from "../features/tasks/hooks/useTask";
+import { useTasksData }         from "../features/tasks/hooks/useTasksData";
 import type { Task, TaskInput } from '../features/tasks/types/task';
 import TaskModal                from "../features/tasks/components/TaskModal";
 import ConfirmDeleteModal       from "../features/tasks/components/ConfirmDeleteModal";
@@ -15,7 +15,7 @@ const TaskPage = () => {
   const [toast, setToast]               = useState<string | null>(null);
   const [taskToDelete, setTaskToDelete] = useState<Task | null>(null);
 
-  const { tasksList, isLoading, deleteTask, createTask, isDeleting, updateTask } = useTasks();
+  const { tasksList, isLoading, deleteTask, createTask, isDeleting, updateTask } = useTasksData();
 
   const openCreate = () => {
     setMode("create");
