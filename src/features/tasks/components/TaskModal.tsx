@@ -1,6 +1,6 @@
 import { Dialog, DialogPanel, DialogTitle } from '@headlessui/react'
 
-import type { Task } from '../types/task';
+import type { Task, TaskInput } from '../types/task';
 import TaskForm from './TaskForm';
 
 type Props = {
@@ -8,7 +8,7 @@ type Props = {
   onClose: () => void;
   mode: "create" | "edit";
   task: Task | null;
-  onSubmit: (data: Partial<Task>) => void;
+  onSubmit: (data: TaskInput) => void;
 };
 
 export default function TaskModal(	{ isOpen,	onClose, mode, task, onSubmit }: 	Props){
@@ -21,13 +21,15 @@ export default function TaskModal(	{ isOpen,	onClose, mode, task, onSubmit }: 	P
         <DialogPanel className="bg-white rounded-lg p-6 w-full max-w-md">
           <DialogTitle className="text-lg font-semibold mb-4 text-black">
             <p className="text-black">{mode === "create" ? "Nueva tarea" : "Editar tarea"}</p>
-          </DialogTitle>
-          <TaskForm
-            mode={mode}
-            task={task}
-            onSubmit={onSubmit}
-            onCancel={onClose}
-          />
+        </DialogTitle>
+
+        <TaskForm
+          mode={mode}
+          task={task}
+          onSubmit={onSubmit}
+          onCancel={onClose}
+        />
+        
         </DialogPanel>
       </div>
     </Dialog>

@@ -1,18 +1,19 @@
 import { useEffect, useState } from "react";
 
-import type { Task } from "../types/task";
+import type { Priority, Task, TaskInput, TaskStatus } from "../types/task";
 
 type Props = {
 	mode: "create" | "edit";
 	task: Task | null;
-	onSubmit: (data: Partial<Task>) => void;
+	onSubmit: (data: TaskInput) => Promise<void> | void;
 };
 
 const useTaskForm = ({ mode, task, onSubmit }: Props) => {
 
 	const [title, setTitle] 						= useState("");
   const [description, setDescription] = useState("");
-  const [priority, setPriority] 			= useState<"low" | "medium" | "high">("low");
+  const [priority, setPriority] 			= useState<Priority>("low");
+	const [status, setStatus] 					= useState<TaskStatus>("pending");
 
 	useEffect(() => {
 		if (mode === "edit" && task) {
@@ -20,24 +21,22 @@ const useTaskForm = ({ mode, task, onSubmit }: Props) => {
 			setTitle(task.title);
 			setDescription(task.description);
 			setPriority(task.priority);
+			setStatus(task.status);
 		}
 	}, [task, mode]);
 
 		
-  const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    onSubmit({
+    await onSubmit({
       title,
       description,
       priority,
-      status: task?.status || "pending",
-      updatedAt: new Date(),
-      createdAt: task?.createdAt || new Date(),
     });
   };
   
-  return {title, setTitle, description, setDescription, priority, setPriority, handleSubmit};
+  return {title, setTitle, description, setDescription, priority, setPriority, handleSubmit, status, setStatus};
 };
 
 export default useTaskForm;

@@ -1,4 +1,4 @@
-export type TaskStatus = 'pending' | 'in-progress' | 'completed';
+export type TaskStatus = 'pending' | 'in_progress' | 'done';
 
 export type Priority = 'low' | 'medium' | 'high';
 
@@ -11,3 +11,5 @@ export interface Task {
   "createdAt": Date,
   "updatedAt": Date,
 };
+
+export type TaskInput = Omit<Task, "id" | "createdAt" | "updatedAt" | "status">;

@@ -1,10 +1,11 @@
-import type { Task } from "../types/task";
+import type { Task, TaskInput } from "../types/task";
 import useTaskForm from "../hooks/useTaskForm";
+import StatusSelector from "./StatusSelector";
 
 type Props = {
   mode: "create" | "edit";
   task: Task | null;
-  onSubmit: (data: Partial<Task>) => void;
+  onSubmit: (data: TaskInput) => Promise<void> | void;
   onCancel: () => void;
 };
 
@@ -17,6 +18,8 @@ const TaskForm = ({ mode, task, onSubmit, onCancel }: Props) => {
     priority,
     setPriority,
     handleSubmit,
+    status,
+    setStatus,
   } = useTaskForm({ mode, task, onSubmit });
 
   return (
@@ -48,7 +51,11 @@ const TaskForm = ({ mode, task, onSubmit, onCancel }: Props) => {
         <option value="high">Alta</option>
       </select>
 
-      <div className="flex justify-end gap-2 mt-4">
+      {mode === "edit" && (
+        <StatusSelector value={status} onChange={setStatus} />
+      )}
+
+      <div className="flex justify-between gap-2 mt-4">
         <button type="button" onClick={onCancel}>
           Cancelar
         </button>

@@ -14,10 +14,10 @@ export const getAllTasks = async (): Promise<Task[]> => {
 
 /**
  * Crea una nueva tarea.
- * @param task objeto de tipo tarea
+ * @param task objeto de tipo tarea pero sin el id.
  * @returns boolean indica si se creo la tarea. 
  */
-export const createTask = async (task: Task): Promise<Task> => {
+export const createTask = async (task: Omit<Task,"id">): Promise<Task> => {
   const { data } = await axios.post(API_URL, task);
   return data;
 };

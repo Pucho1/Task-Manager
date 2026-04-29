@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { getAllTasks, createTask, deleteTasks } from "../api/tasks.api";
+import { getAllTasks, createTask, deleteTasks, updateTasks } from "../api/tasks.api";
 
 export const useTasks = () => {
   const queryClient = useQueryClient();
@@ -24,14 +24,24 @@ export const useTasks = () => {
     }
   });
 
+  const updateMutation = useMutation({
+    mutationFn: updateTasks,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['tasks'] });
+    }
+  });
+
   return {
     tasksList: tasksQuery.data,
     isLoading: tasksQuery.isLoading,
 
-    createTask: createMutation.mutate,
+    createTask: createMutation.mutateAsync,
     isCreating: createMutation.isPending,
     
     deleteTask: deleteMutation.mutate,
     isDeleting: deleteMutation.isPending,
+
+    updateTask: updateMutation.mutateAsync,
+    isUpdating: updateMutation.isPending,
   };
 };
