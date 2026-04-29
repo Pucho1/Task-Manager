@@ -1,3 +1,4 @@
+import Header from "../features/tasks/components/Header";
 import TaskPage from "./TaskPage";
 
 const Layout = () => {
@@ -6,9 +7,7 @@ const Layout = () => {
   return (
     <main className="min-h-screen bg-gray-100">
 
-        <header className="bg-indigo-700 h-70 p-8">
-          <h1 className="text-2xl font-bold text-gray-800">Task Manager</h1>
-        </header>
+        <Header />
 
         <section className="relative mx-auto -mt-24 bg-white rounded-t-[40px] p-8 shadow-2xl min-h-[calc(100vh-150px)]">
           <TaskPage />
