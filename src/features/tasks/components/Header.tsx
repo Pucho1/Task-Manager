@@ -1,32 +1,12 @@
 import { Plus } from "lucide-react";
-import { usePositionStore } from "../context/NavbarVisibilityContext";
-import { useEffect, useRef } from "react";
+import useHeaderTask from "../hooks/useHeaderTask";
 
 type Props = {
   onCreate: () => void;
 };
 
 const Header = ({ onCreate }: Props) => {
-	const ref = useRef<HTMLDivElement | null>(null);
-	const { setNavIsVisible } = usePositionStore();
-
-	useEffect(() => {
-    if (!ref.current) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setNavIsVisible(entry.isIntersecting);
-      },
-      {
-        threshold: 0,
-				rootMargin: "-80px 0px 0px 0px",
-      }
-    );
-
-    observer.observe(ref.current);
-
-    return () => observer.disconnect();
-  }, []);
+	const { ref } = useHeaderTask();
 
   return (
     <header ref={ref} className="bg-indigo-700 h-70 p-3">
