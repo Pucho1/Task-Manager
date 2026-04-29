@@ -3,7 +3,6 @@ import type { Priority, TaskStatus } from "../types/task";
 const useTaskCard = () => {
 
   const getPriorityColor = (priority: Priority): string => {
-
     const colors: Record<Priority, string> = {
       low: 'bg-green-100 text-green-800 border-green-200',
       medium: 'bg-yellow-100 text-yellow-800 border-yellow-200',
@@ -20,15 +19,6 @@ const useTaskCard = () => {
       completed: 'border-green-500'
     };
     return colors[status];
-  };
-
-  const getStatusIcon 	 = (status: TaskStatus): string => {
-    const icons = {
-      pending: '⏳',
-      'in-progress': '🔄',
-      completed: '✅'
-    };
-    return icons[status];
   };
 
   const formatDate       = (date: Date): string => {
@@ -51,20 +41,8 @@ const useTaskCard = () => {
   }).format(d);
   };
 
-//   const handleStatusClick = () => {
-//     if (!onStatusChange) return;
-    
-//     const statusFlow: Record<TaskStatus, TaskStatus> = {
-//       pending: 'in-progress',
-//       'in-progress': 'completed',
-//       completed: 'pending'
-//     };
-    
-//     onStatusChange(task.id, statusFlow[task.status]);
-//   };
 
-
-  return { getPriorityColor, getStatusColor, getStatusIcon, formatDate};
+  return { getPriorityColor, getStatusColor, formatDate};
 }
 
 export default useTaskCard

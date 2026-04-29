@@ -1,24 +1,6 @@
 {
   "tasks": [
     {
-      "id": "1",
-      "title": "Hacer la compra semanal",
-      "description": "Comprar frutas, verduras, carne y productos de limpieza",
-      "priority": "high",
-      "status": "pending",
-      "createdAt": "2026-04-20T09:00:00.000Z",
-      "updatedAt": "2026-04-20T09:00:00.000Z"
-    },
-    {
-      "id": "2",
-      "title": "Llamar al banco",
-      "description": "Consultar comisión de mantenimiento de la cuenta",
-      "priority": "medium",
-      "status": "in_progress",
-      "createdAt": "2026-04-20T10:30:00.000Z",
-      "updatedAt": "2026-04-21T08:00:00.000Z"
-    },
-    {
       "id": "3",
       "title": "Ir al gimnasio",
       "description": "Entrenamiento de fuerza y 20 minutos de cardio",
@@ -90,5 +72,6 @@
       "createdAt": "2026-04-24T17:00:00.000Z",
       "updatedAt": "2026-04-24T17:00:00.000Z"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }
