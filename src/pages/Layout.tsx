@@ -1,4 +1,5 @@
 import Header from "../features/tasks/components/Header";
+import StickyNavbar from "../features/tasks/components/StickyNavbar";
 import TaskPage from "./TaskPage";
 
 const Layout = () => {
@@ -6,13 +7,13 @@ const Layout = () => {
 
   return (
     <main className="min-h-screen bg-gray-100">
+      <Header onCreate={() => {}} />
 
-        <Header />
+      <StickyNavbar onCreate={() => {}} />
 
-        <section className="relative mx-auto -mt-24 bg-white rounded-t-[40px] p-8 shadow-2xl min-h-[calc(100vh-150px)]">
-          <TaskPage />
-        </section>
-
+      <section className="relative mx-auto -mt-24 bg-white rounded-t-[40px] p-8 shadow-2xl min-h-[calc(100vh-150px)]">
+        <TaskPage />
+      </section>
     </main>
   );
 };

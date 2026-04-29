@@ -81,7 +81,7 @@ const TaskPage = () => {
   };
 
   return (
-    <section className=" text-white">
+    <section className="text-white">
       { isLoading ?
         <p>Esta cargando data</p>
       :
