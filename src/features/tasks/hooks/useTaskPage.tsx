@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 import { useTasksData } 				from "./useTasksData";
 import type { Task, TaskInput } from "../types/task";
@@ -10,6 +10,7 @@ const useTaskPage = () => {
   const [selectedTask, setSelectedTask] = useState<Task | null>(null);
   const [toast, setToast]               = useState<string | null>(null);
   const [taskToDelete, setTaskToDelete] = useState<Task | null>(null);
+  const [search, setSearch]             = useState("");
 
   const { tasksList, isLoading, deleteTask, createTask, isDeleting, updateTask } = useTasksData();
 
@@ -106,6 +107,12 @@ const useTaskPage = () => {
   };
 
 
+  const filteredTasks = useMemo(() => {
+    return tasksList?.filter((task) =>
+      task.title.toLowerCase().includes(search.toLowerCase())
+    );
+  }, [tasksList, search]);
+
   return{
     isModalOpen,
     mode,
@@ -117,11 +124,13 @@ const useTaskPage = () => {
     handleAskDelete,
     handleSubmit,
     handleConfirmDelete, 
-		tasksList,
 		isLoading,
 		isDeleting,
 		setIsModalOpen,
 		setTaskToDelete,
+    setSearch,
+    search,
+    filteredTasks,
   };
 };
 

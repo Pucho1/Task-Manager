@@ -1,11 +1,14 @@
 import { Plus } from "lucide-react";
 import useHeaderTask from "../hooks/useHeaderTask";
+import SearchTask from "./SearchTask";
 
 type Props = {
   onCreate: () => void;
+  search: string;
+  setSearch: (value: string) => void;
 };
 
-const Header = ({ onCreate }: Props) => {
+const Header = ({ onCreate, search, setSearch }: Props) => {
 	const { ref } = useHeaderTask();
 
   return (
@@ -18,6 +21,8 @@ const Header = ({ onCreate }: Props) => {
 						Task Manager
 					</h1>
 				</div>
+
+				<SearchTask search={search} setSearch={setSearch} />
 
 				<div className="flex justify-end w-full sm:w-auto mt-4 sm:mt-0">
 					<button

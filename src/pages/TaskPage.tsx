@@ -20,18 +20,20 @@ const TaskPage = () => {
     handleAskDelete,
     handleSubmit,
     handleConfirmDelete, 
-		tasksList,
 		isLoading,
 		isDeleting,
     setIsModalOpen,
     setTaskToDelete,
+    setSearch,
+    search,
+    filteredTasks,
   } = useTaskPage();
  
 
   return (
     <main className="min-h-screen bg-gray-100">
       
-      <Header onCreate={openCreate} />
+      <Header onCreate={openCreate} search={search} setSearch={setSearch} />
 
       <StickyNavbar onCreate={openCreate} />
 
@@ -39,7 +41,7 @@ const TaskPage = () => {
         { isLoading ?
           <p>Esta cargando data</p>
         :
-          tasksList?.map((task: Task) =>
+          filteredTasks?.map((task: Task) =>
             <TaskCard
               key={task.id}
               task={task}
