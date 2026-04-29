@@ -4,7 +4,6 @@ import TaskPage from "./TaskPage";
 
 const Layout = () => {
 
-
   return (
     <main className="min-h-screen bg-gray-100">
       <Header onCreate={() => {}} />

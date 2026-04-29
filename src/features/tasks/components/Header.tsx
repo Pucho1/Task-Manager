@@ -18,7 +18,8 @@ const Header = ({ onCreate }: Props) => {
         setNavIsVisible(entry.isIntersecting);
       },
       {
-        threshold: 0.1 // 👈 cuándo se considera visible
+        threshold: 0,
+				rootMargin: "-80px 0px 0px 0px",
       }
     );
 
@@ -28,32 +29,28 @@ const Header = ({ onCreate }: Props) => {
   }, []);
 
   return (
-    <header ref={ref} className="bg-indigo-700 h-70 p-8">
-			{/* 🔥 Sticky bar */}
-			{/* <div className="sticky top-0 z-40 bg-indigo-700/90 backdrop-blur">
-				<div className="max-w-5xl mx-auto px-4 py-2 flex justify-between">
-					<span className="text-white font-medium">Task Manager</span>
-				</div>
-			</div> */}
-
+    <header ref={ref} className="bg-indigo-700 h-70 p-3">
 			{/* Hero */}
-			<div className="h-70 p-8">
-				<div className="max-w-5xl mx-auto flex items-center justify-between">
-					<h1 className="text-2xl font-semibold text-white">
+			<div className="flex flex-col sm:flex-row items-center justify-between p-3">
+
+				<div className="max-w-5xl">
+					<h1 className="text-xl font-semibold text-white">
 						Task Manager
 					</h1>
+				</div>
 
+				<div className="flex justify-end w-full sm:w-auto mt-4 sm:mt-0">
 					<button
 						onClick={onCreate}
 						className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg"
 					>
 						<Plus size={20} />
-						Nueva tarea
+						Add
 					</button>
 				</div>
+
 			</div>
 
-			
 		</header>
   );
 };
