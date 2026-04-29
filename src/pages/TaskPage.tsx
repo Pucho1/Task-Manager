@@ -1,90 +1,38 @@
-import { useState } from "react";
 
-import TaskCard                 from "../features/tasks/components/TaskCard";
-import { useTasksData }         from "../features/tasks/hooks/useTasksData";
-import type { Task, TaskInput } from '../features/tasks/types/task';
-import TaskModal                from "../features/tasks/components/TaskModal";
-import ConfirmDeleteModal       from "../features/tasks/components/ConfirmDeleteModal";
-import Header                   from "../features/tasks/components/Header";
-import StickyNavbar             from "../features/tasks/components/StickyNavbar";
+import TaskCard            from "../features/tasks/components/TaskCard";
+import type { Task }       from '../features/tasks/types/task';
+import TaskModal           from "../features/tasks/components/TaskModal";
+import ConfirmDeleteModal  from "../features/tasks/components/ConfirmDeleteModal";
+import Header              from "../features/tasks/components/Header";
+import StickyNavbar        from "../features/tasks/components/StickyNavbar";
+import useTaskPage         from "../features/tasks/hooks/useTaskPage";
 
 const TaskPage = () => {
-  const [isModalOpen, setIsModalOpen]   = useState(false);
-  const [mode, setMode]                 = useState<"create" | "edit">("create");
-  const [selectedTask, setSelectedTask] = useState<Task | null>(null);
-  const [toast, setToast]               = useState<string | null>(null);
-  const [taskToDelete, setTaskToDelete] = useState<Task | null>(null);
 
-  const { tasksList, isLoading, deleteTask, createTask, isDeleting, updateTask } = useTasksData();
-
-  const openCreate = () => {
-    setMode("create");
-    setSelectedTask(null)
-    setIsModalOpen(true);;
-  };
-
-  const openEdit = (task: Task) => {
-    setMode("edit");
-    setSelectedTask(task);
-    setIsModalOpen(true);
-  };
-
-  const handleAskDelete  = (task: Task) => {
-    setTaskToDelete(task);
-  };
-
-  const handleSubmit = async (data: TaskInput) => {
-    try {
-      if (mode === "create") {
-        await createTask({
-          ...data,
-          status: "pending",
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        });
-
-        setIsModalOpen(false);
-        showToast("Tarea creada");
-        return;
-      }
-
-      if (mode === "edit" && selectedTask) {
-        await updateTask({
-          ...selectedTask,
-          ...data,
-          updatedAt: new Date(),
-        });
-
-        setIsModalOpen(false);
-        showToast("Tarea actualizada");
-      }
-    } catch {
-      showToast("Error al guardar la tarea");
-    }
-  };
-
-  const showToast = (msg: string) => {
-    setToast(msg);
-    setTimeout(() => setToast(null), 3000);
-  };
-
-  const handleConfirmDelete = () => {
-    if (!taskToDelete) return;
-
-    deleteTask(taskToDelete.id, {
-      onSuccess: () => {
-        setTaskToDelete(null);
-        showToast("Tarea eliminada");
-      },
-      onError: () => {
-        showToast("Error al eliminar");
-      }
-    });
-  };
+  const {
+    isModalOpen,
+    mode,
+    selectedTask,
+    toast,
+    taskToDelete,
+    openCreate,
+    openEdit,
+    handleAskDelete,
+    handleSubmit,
+    handleConfirmDelete, 
+		tasksList,
+		isLoading,
+		isDeleting,
+    setIsModalOpen,
+    setTaskToDelete,
+  } = useTaskPage();
+ 
 
   return (
     <main className="min-h-screen bg-gray-100">
+      
       <Header onCreate={openCreate} />
+
       <StickyNavbar onCreate={openCreate} />
 
       <section className="relative mx-auto -mt-24 bg-white rounded-t-[40px] p-8 shadow-2xl min-h-[calc(100vh-150px)] text-white">
