@@ -1,9 +1,9 @@
-import Layout from './pages/Layout';
+import TaskPage from "./pages/TaskPage";
 
 function App() {
 
   return (
-    <Layout />
+    <TaskPage />
   );
 };
 
