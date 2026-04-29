@@ -15,8 +15,8 @@ const useTaskCard = () => {
   const getStatusColor 	 = (status: TaskStatus): string => {
     const colors = {
       pending: 'border-dotted border-gray-300',
-      'in-progress': 'border-t-indigo-500 border-r-indigo-500 border-b-transparent border-l-transparent',
-      completed: 'border-green-500'
+      'in_progress': 'border-t-indigo-500 border-r-indigo-500 border-b-transparent border-l-transparent',
+      done: 'border-green-500'
     };
     return colors[status];
   };
