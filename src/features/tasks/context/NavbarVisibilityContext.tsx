@@ -1,6 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
 import { createContext, useContext, useState } from "react";
-import type { Position } from "./contextInterfaces";
+import type { Position } from "./navbar-visibility.types";
 
 const defaultPosition: Position = {
   x: 0,

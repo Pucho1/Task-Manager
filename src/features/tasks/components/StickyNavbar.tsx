@@ -1,6 +1,6 @@
 import { Plus } from "lucide-react";
 
-import { usePositionStore } from "../context/Positioncontext";
+import { usePositionStore } from "../context/NavbarVisibilityContext";
 
 type Props = {
   onCreate: () => void;

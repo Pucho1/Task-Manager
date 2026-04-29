@@ -1,5 +1,5 @@
 import { Plus } from "lucide-react";
-import { usePositionStore } from "../context/Positioncontext";
+import { usePositionStore } from "../context/NavbarVisibilityContext";
 import { useEffect, useRef } from "react";
 
 type Props = {
