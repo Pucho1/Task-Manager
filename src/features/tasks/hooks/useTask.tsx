@@ -27,7 +27,11 @@ export const useTasks = () => {
   return {
     tasksList: tasksQuery.data,
     isLoading: tasksQuery.isLoading,
+
     createTask: createMutation.mutate,
+    isCreating: createMutation.isPending,
+    
     deleteTask: deleteMutation.mutate,
+    isDeleting: deleteMutation.isPending,
   };
 };

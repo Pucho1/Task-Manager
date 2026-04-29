@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
 import type { Task } from "../types/task";
+import useTaskForm from "../hooks/useTaskForm";
 
 type Props = {
   mode: "create" | "edit";
@@ -9,31 +9,15 @@ type Props = {
 };
 
 const TaskForm = ({ mode, task, onSubmit, onCancel }: Props) => {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [priority, setPriority] = useState<"low" | "medium" | "high">("low");
-
-  useEffect(() => {
-    if (mode === "edit" && task) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setTitle(task.title);
-      setDescription(task.description);
-      setPriority(task.priority);
-    }
-  }, [task, mode]);
-
-  const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    onSubmit({
-      title,
-      description,
-      priority,
-      status: task?.status || "pending",
-      updatedAt: new Date(),
-      createdAt: task?.createdAt || new Date(),
-    });
-  };
+  const {
+    title,
+    setTitle,
+    description,
+    setDescription,
+    priority,
+    setPriority,
+    handleSubmit,
+  } = useTaskForm({ mode, task, onSubmit });
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-3">
@@ -54,7 +38,9 @@ const TaskForm = ({ mode, task, onSubmit, onCancel }: Props) => {
 
       <select
         value={priority}
-        onChange={(e) => setPriority(e.target.value as "low" | "medium" | "high")}
+        onChange={(e) =>
+          setPriority(e.target.value as "low" | "medium" | "high")
+        }
         className="border p-2 rounded"
       >
         <option value="low">Baja</option>

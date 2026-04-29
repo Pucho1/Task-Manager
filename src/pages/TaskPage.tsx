@@ -4,13 +4,16 @@ import TaskCard from "../features/tasks/components/TaskCard";
 import { useTasks } from "../features/tasks/hooks/useTask";
 import type { Task } from '../features/tasks/types/task';
 import TaskModal from "../features/tasks/components/TaskModal";
+import ConfirmDeleteModal from "../features/tasks/components/ConfirmDeleteModal";
 
 const TaskPage = () => {
   const [isModalOpen, setIsModalOpen]   = useState(false);
   const [mode, setMode]                 = useState<"create" | "edit">("create");
   const [selectedTask, setSelectedTask] = useState<Task | null>(null);
+  const [toast, setToast]               = useState<string | null>(null);
+  const [taskToDelete, setTaskToDelete] = useState<Task | null>(null);
 
-  const { tasksList, isLoading, deleteTask  } = useTasks();
+  const { tasksList, isLoading, deleteTask, createTask, isDeleting } = useTasks();
 
   // const openCreate = () => {
   //   setMode("create");
@@ -24,15 +27,33 @@ const TaskPage = () => {
     setIsModalOpen(true);
   };
 
-  const handleDelete = (task: Task) => {
-    deleteTask(task.id);
+  const handleAskDelete  = (task: Task) => {
+    setTaskToDelete(task);
   };
 
   const handleSubmit = (data: Partial<Task>) => {
     if (mode === "create") {
-      console.log("Crear tarea con datos:", data);
-      // Aquí iría la lógica para crear una nueva tarea usando la API
+      createTask(data);
     }
+  };
+
+  const showToast = (msg: string) => {
+    setToast(msg);
+    setTimeout(() => setToast(null), 3000);
+  };
+
+  const handleConfirmDelete = () => {
+    if (!taskToDelete) return;
+
+    deleteTask(taskToDelete.id, {
+      onSuccess: () => {
+        setTaskToDelete(null);
+        showToast("Tarea eliminada");
+      },
+      onError: () => {
+        showToast("Error al eliminar");
+      }
+    });
   };
 
   return (
@@ -45,10 +66,16 @@ const TaskPage = () => {
             key={task.id}
             task={task}
             openEditModal={() => openEdit(task)}
-            onDelete={() => handleDelete(task)}
+            onDelete={() => handleAskDelete(task)}
           />
         )
       }
+
+      {toast && (
+        <div className="fixed bottom-4 right-4 bg-black text-white px-4 py-2 rounded shadow">
+          {toast}
+        </div>
+      )}
 
       <TaskModal
         isOpen={isModalOpen}
@@ -56,6 +83,13 @@ const TaskPage = () => {
         mode={mode}
         task={selectedTask}
         onSubmit={handleSubmit}
+      />
+
+      <ConfirmDeleteModal
+        task={taskToDelete}
+        onCancel={() => setTaskToDelete(null)}
+        onConfirm={handleConfirmDelete}
+        isLoading={isDeleting}
       />
     </section>
   );
