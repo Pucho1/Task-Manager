@@ -8,7 +8,7 @@ type Props = {
   onClose: () => void;
   mode: "create" | "edit";
   task: Task | null;
-  onSubmit: (data: TaskInput) => void;
+  onSubmit: (data: TaskInput) => Promise<void> | void;
 };
 
 export default function TaskModal(	{ isOpen,	onClose, mode, task, onSubmit }: 	Props){

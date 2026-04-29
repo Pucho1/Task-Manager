@@ -4,8 +4,14 @@ import type { Task } from '../types/task';
 import useTaskCard from '../hooks/useTaskCard';
 import Menucard from './Menucard';
 
+type Props = {
+	task: Task;
+	openEditModal: () => void;
+	onDelete: () => void;
+};
 
-const TaskCard = ({task, openEditModal, onDelete}: {task: Task, openEditModal: () => void, onDelete: () => void}) => {
+
+const TaskCard = ({task, openEditModal, onDelete}: Props) => {
 
 	const { getPriorityColor, getStatusColor } = useTaskCard();
 

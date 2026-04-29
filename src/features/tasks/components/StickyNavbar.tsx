@@ -7,9 +7,10 @@ type Props = {
 };
 
 const StickyNavbar = ({ onCreate }: Props) => {
+  
   const { navIsVisible } = usePositionStore();
 
-  if (navIsVisible) return null; // 👈 clave
+  if (navIsVisible) return null;
 
   return (
     <div className="fixed top-0 left-0 w-full z-50 bg-white shadow-md animate-fade-down">

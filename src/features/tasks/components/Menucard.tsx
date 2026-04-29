@@ -1,8 +1,13 @@
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { EllipsisVertical } from 'lucide-react';
 
+type Props = {
+    onEdit: () => void;
+    onDelete: () => void;
+};
+
 const Menucard = (
-    { onEdit, onDelete }: { onEdit: () => void, onDelete: () => void }
+    { onEdit, onDelete }: Props
 ) => {
   return (
     <Menu>
