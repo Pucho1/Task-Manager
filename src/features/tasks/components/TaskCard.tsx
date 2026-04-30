@@ -16,7 +16,7 @@ const TaskCard = ({ task, openEditModal, onDelete }: Props) => {
   return (
     <li className="list-none h-full">
       <article
-        className="flex flex-row bg-white rounded-xl h-full shadow-md border border-gray-200 mb-4 hover:shadow-lg transition-shadow duration-200"
+        className="flex flex-row bg-white rounded-xl h-full shadow-md border border-gray-200 mb-4 hover:shadow-lg transition-shadow duration-200 overflow-hidden"
         aria-labelledby={`task-title-${task.id}`}
       >
         <div className={`flex flex-col flex-none w-14 ${getPriorityColor(task.priority)} p-1 rounded-xl`}>
@@ -33,17 +33,17 @@ const TaskCard = ({ task, openEditModal, onDelete }: Props) => {
           </div>
         </div>
 
-        <div className="flex flex-col flex-1 p-4 w-60">
-          <div className="flex items-start justify-between mb-3">
+        <div className="flex flex-col flex-1 p-4 min-w-0">
+          <div className="flex items-start mb-3">
             <div className="flex-1 min-w-0">
-              <h3 id={`task-title-${task.id}`} className="text-lg font-semibold text-gray-900 truncate mb-1">
+              <h3 id={`task-title-${task.id}`} className="text-lg font-semibold text-gray-900 truncate block mb-1 w-full">
                 {task.title}
               </h3>
             </div>
           </div>
 
           {task.description && (
-            <p className="text-gray-600 text-sm mb-4 leading-relaxed h-[50%] overflow-y-auto">
+            <p className="text-gray-600 text-sm mb-4 leading-relaxed line-clamp-2">
               {task.description}
             </p>
           )}
