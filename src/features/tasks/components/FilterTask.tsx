@@ -18,7 +18,7 @@ const FilterTask = <T extends string>({
   const selectId = useId();
 
   return (
-    <div>
+    <div className="w-1/3">
       <label
         htmlFor={selectId}
         className="flex sm:inline text-sm font-medium text-gray-600 mr-2 min-w-max"

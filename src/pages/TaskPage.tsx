@@ -57,7 +57,7 @@ const TaskPage = () => {
 
       <section className="relative mx-auto -mt-24 bg-white rounded-t-[40px] p-8 shadow-2xl min-h-[calc(100vh-150px)]">
         
-        <div className="flex flex-wrap gap-2 mb-4 w-full justify-between items-end">
+        <div className="flex gap-2 mb-4 w-full items-end">
           <FilterTask
             label="Estado"
             valueFilter={statusFilter}
@@ -71,7 +71,7 @@ const TaskPage = () => {
             options={priorityOptions}
           />
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 w-1/3 justify-end">
             {(statusFilter !== "all" || priorityFilter !== "all") && (
               <button 
                 aria-label="Limpiar filtros"
