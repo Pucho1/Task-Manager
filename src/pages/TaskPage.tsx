@@ -38,18 +38,33 @@ const TaskPage = () => {
       <StickyNavbar onCreate={openCreate} />
 
       <section className="relative mx-auto -mt-24 bg-white rounded-t-[40px] p-8 shadow-2xl min-h-[calc(100vh-150px)] text-white">
-        { isLoading ?
-          <p>Esta cargando data</p>
-        :
-          filteredTasks?.map((task: Task) =>
-            <TaskCard
-              key={task.id}
-              task={task}
-              openEditModal={() => openEdit(task)}
-              onDelete={() => handleAskDelete(task)}
-            />
-          )
-        }
+        {isLoading && (
+          <div className="flex flex-col items-center gap-4 py-10">
+            {isLoading && new Array(3).fill(0).map((_, i) => (
+              <div key={i} className="h-32 w-full bg-gray-200 animate-pulse rounded-[40px] mb-4" />
+            ))}
+          </div>
+        )}
+
+        {!isLoading && filteredTasks?.length === 0 && (
+          <div className="text-center py-20">
+            <p className="text-xl text-gray-400">No se encontraron tareas.</p>
+            <p className="text-sm text-gray-300">Intenta cambiar los filtros o crea una nueva.</p>
+          </div>
+        )}
+
+        {!isLoading && filteredTasks && filteredTasks.length > 0 && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredTasks.map((task: Task) => (
+              <TaskCard
+                key={task.id}
+                task={task}
+                openEditModal={() => openEdit(task)}
+                onDelete={() => handleAskDelete(task)}
+              />
+            ))}
+          </div>
+        )}
 
         {toast && (
           <div className="fixed bottom-4 right-4 bg-black text-white px-4 py-2 rounded shadow">

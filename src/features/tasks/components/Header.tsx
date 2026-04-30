@@ -22,17 +22,19 @@ const Header = ({ onCreate, search, setSearch }: Props) => {
 					</h1>
 				</div>
 
-				<SearchTask search={search} setSearch={setSearch} />
+				<nav className="flex max-w-md justtify-between items-center gap-4 sm:gap-0">
+					<SearchTask search={search} setSearch={setSearch} />
 
-				<div className="flex justify-end w-full sm:w-auto mt-4 sm:mt-0">
-					<button
-						onClick={onCreate}
-						className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg"
-					>
-						<Plus size={20} />
-						Add
-					</button>
-				</div>
+					<div className="flex justify-end w-1/2">
+						<button
+							onClick={onCreate}
+							className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg"
+						>
+							<Plus size={20} />
+							Add
+						</button>
+					</div>
+				</nav>
 
 			</div>
 
