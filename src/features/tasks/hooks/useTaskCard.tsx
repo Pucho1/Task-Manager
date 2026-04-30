@@ -1,6 +1,9 @@
-import type { Priority, TaskStatus } from "../types/task";
+import type { Priority, Task, TaskStatus } from "../types/task";
+import { useTasksData } from "./useTasksData";
 
 const useTaskCard = () => {
+
+  const { updateTask } = useTasksData();
 
   const getPriorityColor = (priority: Priority): string => {
     const colors: Record<Priority, string> = {
@@ -13,25 +16,21 @@ const useTaskCard = () => {
   };
 
   const getStatusColor 	 = (status: TaskStatus): string => {
-    const colors = {
+    const colors: Record<TaskStatus, string> = {
       pending: 'border-dotted border-gray-300',
-      'in-progress': 'border-t-indigo-500 border-r-indigo-500 border-b-transparent border-l-transparent',
-      completed: 'border-green-500'
+      'in_progress': 'border-t-red-300 border-r-red-300 border-b-transparent border-l-transparent',
+      done: 'border-green-500'
     };
     return colors[status];
   };
 
   const formatDate       = (date: Date): string => {
-   // 1. Intentamos convertir el valor a Date
   const d = new Date(date);
 
-  // 2. Verificamos si es una fecha "finita" y válida
-  // isNaN(d.getTime()) detecta si el objeto Date es inválido
   if (!date || isNaN(d.getTime())) {
-    return "Sin fecha"; // O un string vacío "" para que no se note
+    return "Sin fecha"; 
   }
 
-  // 3. Ahora sí, formateamos con seguridad
   return new Intl.DateTimeFormat('es-ES', {
     day: '2-digit',
     month: '2-digit',
@@ -41,8 +40,24 @@ const useTaskCard = () => {
   }).format(d);
   };
 
+  const onChangeStatus = async (task: Task) => {
 
-  return { getPriorityColor, getStatusColor, formatDate};
+    const nextStatus: Record<TaskStatus, TaskStatus> = {
+      pending: 'in_progress',
+      'in_progress': 'done',
+      done: 'pending'
+    };
+
+    const newStatus = nextStatus[task.status];
+
+    await updateTask({
+      ...task,
+      status: newStatus,
+      updatedAt: new Date()
+    });
+  };
+
+  return { getPriorityColor, getStatusColor, formatDate, onChangeStatus};
 }
 
 export default useTaskCard
