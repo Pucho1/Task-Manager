@@ -1,18 +1,34 @@
 import { useMemo, useState } from "react";
 
-import { useTasksData } 				from "./useTasksData";
-import type { Task, TaskInput } from "../types/task";
+import { useTasksData } 				                      from "./useTasksData";
+import type { Priority, Task, TaskInput, TaskStatus } from "../types/task";
 
 const useTaskPage = () => {
 
-  const [isModalOpen, setIsModalOpen]   = useState(false);
-  const [mode, setMode]                 = useState<"create" | "edit">("create");
-  const [selectedTask, setSelectedTask] = useState<Task | null>(null);
-  const [toast, setToast]               = useState<string | null>(null);
-  const [taskToDelete, setTaskToDelete] = useState<Task | null>(null);
-  const [search, setSearch]             = useState("");
+  const [isModalOpen, setIsModalOpen]       = useState(false);
+  const [mode, setMode]                     = useState<"create" | "edit">("create");
+  const [selectedTask, setSelectedTask]     = useState<Task | null>(null);
+  const [toast, setToast]                   = useState<string | null>(null);
+  const [taskToDelete, setTaskToDelete]     = useState<Task | null>(null);
+  const [search, setSearch]                 = useState("");
+  const [statusFilter, setStatusFilter]     = useState<"all" | TaskStatus>("all");
+  const [priorityFilter, setPriorityFilter] = useState<"all" | Priority>("all");
 
   const { tasksList, isLoading, deleteTask, createTask, isDeleting, updateTask } = useTasksData();
+
+  const statusOptions = [
+    { value: 'all',         label: 'Todos' },
+    { value: 'pending',     label: 'Pendiente' },
+    { value: 'in_progress', label: 'En progreso' },
+    { value: 'done',        label: 'Completada' },
+  ];
+
+  const priorityOptions = [
+    { value: 'all',    label: 'Todas' },
+    { value: 'low',    label: 'Baja' },
+    { value: 'medium', label: 'Media' },
+    { value: 'high',   label: 'Alta' },
+  ];
 
 	/**
 	 * Abre el modal para crear una nueva tarea. 
@@ -110,8 +126,13 @@ const useTaskPage = () => {
   const filteredTasks = useMemo(() => {
     return tasksList?.filter((task) =>
       task.title.toLowerCase().includes(search.toLowerCase())
+    ).filter((task) =>
+      statusFilter === "all" ? true : task.status === statusFilter
+    )
+    .filter((task) =>
+      priorityFilter === "all" ? true : task.priority === priorityFilter
     );
-  }, [tasksList, search]);
+  }, [tasksList, search, statusFilter, priorityFilter]);
 
   return{
     isModalOpen,
@@ -131,6 +152,12 @@ const useTaskPage = () => {
     setSearch,
     search,
     filteredTasks,
+    statusFilter,
+    priorityFilter,
+    setStatusFilter,
+    setPriorityFilter,
+    statusOptions,
+    priorityOptions,
   };
 };
 

@@ -6,6 +6,7 @@ import ConfirmDeleteModal  from "../features/tasks/components/ConfirmDeleteModal
 import Header              from "../features/tasks/components/Header";
 import StickyNavbar        from "../features/tasks/components/StickyNavbar";
 import useTaskPage         from "../features/tasks/hooks/useTaskPage";
+import FilterTask          from "../features/tasks/components/FilterTask";
 
 const TaskPage = () => {
 
@@ -27,6 +28,12 @@ const TaskPage = () => {
     setSearch,
     search,
     filteredTasks,
+    setStatusFilter,
+    setPriorityFilter,
+    statusFilter,
+    priorityFilter,
+    statusOptions,
+    priorityOptions,
   } = useTaskPage();
  
 
@@ -38,6 +45,32 @@ const TaskPage = () => {
       <StickyNavbar onCreate={openCreate} />
 
       <section className="relative mx-auto -mt-24 bg-white rounded-t-[40px] p-8 shadow-2xl min-h-[calc(100vh-150px)] text-white">
+        
+        <div className="flex flex-wrap gap-2 mb-4 w-full justify-between items-end">
+          <FilterTask
+            label="Estado"
+            valueFilter={statusFilter}
+            handlerFilter={(val) => setStatusFilter(val)}
+            options={statusOptions}
+          />
+          <FilterTask
+            label="Prioridad"
+            valueFilter={priorityFilter}
+            handlerFilter={(val) => setPriorityFilter(val)}
+            options={priorityOptions}
+          />
+
+          <button 
+            className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg"
+            onClick={() => {
+              setStatusFilter("all");
+              setPriorityFilter("all");
+            }}>
+            Limpiar
+          </button>
+
+        </div>
+        
         {isLoading && (
           <div className="flex flex-col items-center gap-4 py-10">
             {isLoading && new Array(3).fill(0).map((_, i) => (
