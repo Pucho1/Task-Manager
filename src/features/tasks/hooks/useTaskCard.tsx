@@ -27,7 +27,7 @@ const useTaskCard = () => {
   const formatDate       = (date: Date): string => {
   const d = new Date(date);
 
-  if (!date || isNaN(d.getTime())) {
+  if (!date || Number.isNaN(d.getTime())) {
     return "Sin fecha"; 
   }
 
@@ -40,24 +40,28 @@ const useTaskCard = () => {
   }).format(d);
   };
 
-  const onChangeStatus = async (task: Task) => {
-
+  const getNextStatus = (status: TaskStatus): TaskStatus => {
     const nextStatus: Record<TaskStatus, TaskStatus> = {
       pending: 'in_progress',
       'in_progress': 'done',
       done: 'pending'
     };
+    
+    return nextStatus[status];
+  };
 
-    const newStatus = nextStatus[task.status];
+  const onChangeStatus = async (task: Task) => {
 
-    await updateTask({
+    const newStatus = getNextStatus(task.status);
+
+    updateTask({
       ...task,
       status: newStatus,
       updatedAt: new Date()
     });
   };
 
-  return { getPriorityColor, getStatusColor, formatDate, onChangeStatus};
+  return { getPriorityColor, getStatusColor, formatDate, onChangeStatus, getNextStatus};
 }
 
 export default useTaskCard

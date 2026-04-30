@@ -23,6 +23,7 @@ const StickyNavbar = ({ onCreate }: Props) => {
         <button
           onClick={onCreate}
           className="flex items-center gap-2 bg-blue-600 text-white px-3 py-1.5 rounded-lg"
+          aria-label="Crear nueva tarea"
         >
           <Plus size={16} />
           Add

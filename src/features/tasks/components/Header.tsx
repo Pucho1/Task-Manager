@@ -29,6 +29,7 @@ const Header = ({ onCreate, search, setSearch }: Props) => {
 						<button
 							onClick={onCreate}
 							className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg"
+							aria-label="Crear nueva tarea"
 						>
 							<Plus size={20} />
 							Add

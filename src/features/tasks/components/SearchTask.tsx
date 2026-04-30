@@ -16,6 +16,7 @@ const SearchTask = ({ search, setSearch }: SearchTaskProps) => {
 				placeholder="Buscar tareas..."
 				value={search}
 				onChange={(e) => setSearch(e.target.value)}
+				aria-label="Buscar tareas"
 				className="pl-9 pr-3 py-2 border rounded-lg w-full"
 			/>
 

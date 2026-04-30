@@ -74,6 +74,7 @@ const TaskPage = () => {
           <div className="flex items-center gap-2">
             {(statusFilter !== "all" || priorityFilter !== "all") && (
               <button 
+                aria-label="Limpiar filtros"
                 className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg"
                 onClick={() => {
                   setStatusFilter("all");
@@ -96,7 +97,11 @@ const TaskPage = () => {
         }
 
         {toast && (
-          <div className="fixed bottom-4 right-4 bg-black text-white px-4 py-2 rounded shadow">
+          <div 
+            className="fixed bottom-4 right-4 bg-black text-white px-4 py-2 rounded shadow"
+            role="alert"
+            aria-live="assertive"
+          >
             {toast}
           </div>
         )}

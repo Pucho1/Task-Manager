@@ -1,4 +1,4 @@
-import { Dialog, DialogPanel } from "@headlessui/react";
+import { Description, Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
 
 type Props = {
   task: { id: string; title: string } | null;
@@ -10,23 +10,26 @@ type Props = {
 const ConfirmDeleteModal = ({ task, onCancel, onConfirm, isLoading }: Props) => {
   return (
     <Dialog open={!!task} onClose={onCancel} className="relative z-50">
-      
       <div className="fixed inset-0 bg-black/30" />
 
       <div className="fixed inset-0 flex items-center justify-center p-2">
         <DialogPanel className="flex flex-col bg-white rounded-lg p-3 w-full max-w-sm gap-8">
+          <DialogTitle className="text-lg font-semibold text-black">
+            Confirmar eliminacion
+          </DialogTitle>
 
-          <p className="text-sm text-gray-600 mb-4">
-            ¿Seguro que quieres eliminar la tarea:{" "}
+          <Description className="text-sm text-gray-600 mb-4">
+            Seguro que quieres eliminar la tarea:{" "}
             <span className="font-bold">{task?.title}</span>?
-          </p>
+          </Description>
 
           <div className="flex justify-between gap-4">
-            <button onClick={onCancel}>
+            <button type="button" onClick={onCancel}>
               Cancelar
             </button>
 
             <button
+              type="button"
               onClick={onConfirm}
               disabled={isLoading}
               className="bg-red-600 text-white px-4 py-2 rounded"
@@ -34,7 +37,6 @@ const ConfirmDeleteModal = ({ task, onCancel, onConfirm, isLoading }: Props) => 
               {isLoading ? "Eliminando..." : "Eliminar"}
             </button>
           </div>
-
         </DialogPanel>
       </div>
     </Dialog>

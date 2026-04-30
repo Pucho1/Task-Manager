@@ -21,7 +21,7 @@ export default function TaskModal(	{ isOpen,	onClose, mode, task, onSubmit }: 	P
         <DialogPanel className="bg-white rounded-lg p-6 w-full max-w-md">
           <DialogTitle className="text-lg font-semibold mb-4 text-black">
             <p className="text-black">{mode === "create" ? "Nueva tarea" : "Editar tarea"}</p>
-        </DialogTitle>
+          </DialogTitle>
 
         <TaskForm
           mode={mode}
