@@ -5,9 +5,9 @@
       "title": "Ir al gimnasio",
       "description": "Entrenamiento de fuerza y 20 minutos de cardio",
       "priority": "low",
-      "status": "done",
+      "status": "in_progress",
       "createdAt": "2026-04-21T07:00:00.000Z",
-      "updatedAt": "2026-04-21T08:30:00.000Z"
+      "updatedAt": "2026-04-30T17:02:53.516Z"
     },
     {
       "id": "4",
