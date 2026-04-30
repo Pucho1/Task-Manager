@@ -1,12 +1,14 @@
 
-import TaskCard            from "../features/tasks/components/TaskCard";
-import type { Task }       from '../features/tasks/types/task';
 import TaskModal           from "../features/tasks/components/TaskModal";
 import ConfirmDeleteModal  from "../features/tasks/components/ConfirmDeleteModal";
 import Header              from "../features/tasks/components/Header";
 import StickyNavbar        from "../features/tasks/components/StickyNavbar";
 import useTaskPage         from "../features/tasks/hooks/useTaskPage";
 import FilterTask          from "../features/tasks/components/FilterTask";
+import Skeleton            from "../features/tasks/components/Skeleton";
+import ErrorFetch          from "../features/tasks/components/ErrorFetch";
+import Empty               from "../features/tasks/components/Empty";
+import GridTask            from "../features/tasks/components/GridTask";
 
 const TaskPage = () => {
 
@@ -34,8 +36,17 @@ const TaskPage = () => {
     priorityFilter,
     statusOptions,
     priorityOptions,
+    getTaskError,
   } = useTaskPage();
  
+  if(isLoading){
+    return(<Skeleton />);
+  };
+
+  if(getTaskError){
+    return( <ErrorFetch /> );
+  };
+
 
   return (
     <main className="min-h-screen bg-gray-100">
@@ -44,7 +55,7 @@ const TaskPage = () => {
 
       <StickyNavbar onCreate={openCreate} />
 
-      <section className="relative mx-auto -mt-24 bg-white rounded-t-[40px] p-8 shadow-2xl min-h-[calc(100vh-150px)] text-white">
+      <section className="relative mx-auto -mt-24 bg-white rounded-t-[40px] p-8 shadow-2xl min-h-[calc(100vh-150px)]">
         
         <div className="flex flex-wrap gap-2 mb-4 w-full justify-between items-end">
           <FilterTask
@@ -60,44 +71,29 @@ const TaskPage = () => {
             options={priorityOptions}
           />
 
-          <button 
-            className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg"
-            onClick={() => {
-              setStatusFilter("all");
-              setPriorityFilter("all");
-            }}>
-            Limpiar
-          </button>
-
+          <div className="flex items-center gap-2">
+            {(statusFilter !== "all" || priorityFilter !== "all") && (
+              <button 
+                className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg"
+                onClick={() => {
+                  setStatusFilter("all");
+                  setPriorityFilter("all");
+                }}>
+                Limpiar
+              </button>
+            )}    
+          </div>
         </div>
-        
-        {isLoading && (
-          <div className="flex flex-col items-center gap-4 py-10">
-            {isLoading && new Array(3).fill(0).map((_, i) => (
-              <div key={i} className="h-32 w-full bg-gray-200 animate-pulse rounded-[40px] mb-4" />
-            ))}
-          </div>
-        )}
 
-        {!isLoading && filteredTasks?.length === 0 && (
-          <div className="text-center py-20">
-            <p className="text-xl text-gray-400">No se encontraron tareas.</p>
-            <p className="text-sm text-gray-300">Intenta cambiar los filtros o crea una nueva.</p>
-          </div>
-        )}
-
-        {!isLoading && filteredTasks && filteredTasks.length > 0 && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredTasks.map((task: Task) => (
-              <TaskCard
-                key={task.id}
-                task={task}
-                openEditModal={() => openEdit(task)}
-                onDelete={() => handleAskDelete(task)}
-              />
-            ))}
-          </div>
-        )}
+        {filteredTasks.length === 0 ? (
+          <Empty />
+        ) : 
+          <GridTask 
+            filteredTasks={filteredTasks} 
+            openEdit={openEdit} 
+            handleAskDelete={handleAskDelete} 
+          />
+        }
 
         {toast && (
           <div className="fixed bottom-4 right-4 bg-black text-white px-4 py-2 rounded shadow">

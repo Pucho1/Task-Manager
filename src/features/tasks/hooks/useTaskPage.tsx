@@ -14,7 +14,15 @@ const useTaskPage = () => {
   const [statusFilter, setStatusFilter]     = useState<"all" | TaskStatus>("all");
   const [priorityFilter, setPriorityFilter] = useState<"all" | Priority>("all");
 
-  const { tasksList, isLoading, deleteTask, createTask, isDeleting, updateTask } = useTasksData();
+  const { 
+    tasksList,
+    getTaskError,
+    isLoading, 
+    deleteTask, 
+    createTask, 
+    isDeleting, 
+    updateTask,
+  } = useTasksData();
 
   const statusOptions = [
     { value: 'all',         label: 'Todos' },
@@ -64,33 +72,43 @@ const useTaskPage = () => {
 	 * Envía el formulario para crear o actualizar una tarea.
 	 * @param data 
 	 */
-  const handleSubmit = async (data: TaskInput) => {
-    try {
-      if (mode === "create") {
-        await createTask({
-          ...data,
-          status: "pending",
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        });
+  const handleSubmit = (data: TaskInput) => {
+    if (mode === "create") {
+      createTask({
+        ...data,
+        status: "pending",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        onSuccess: () => {
+          setIsModalOpen(false);
+          showToast("Tarea creada");
+        },
+        onError: () => {
+          showToast("Error al crear la tarea");
+        }
+      });
+      return;
+    }
 
-        setIsModalOpen(false);
-        showToast("Tarea creada");
-        return;
-      }
-
-      if (mode === "edit" && selectedTask) {
-        await updateTask({
+    if (mode === "edit" && selectedTask) {
+      updateTask(
+        {
           ...selectedTask,
           ...data,
           updatedAt: new Date(),
-        });
-
-        setIsModalOpen(false);
-        showToast("Tarea actualizada");
-      }
-    } catch {
-      showToast("Error al guardar la tarea");
+        },
+        {
+          onSuccess: () => {
+            setIsModalOpen(false);
+            showToast("Tarea actualizada");
+          },
+          onError: () => {
+            showToast("Error al actualizar la tarea");
+          }
+        }
+      );
     }
   };
 
@@ -124,9 +142,13 @@ const useTaskPage = () => {
 
 
   const filteredTasks = useMemo(() => {
-    return tasksList?.filter((task) =>
+    if (!tasksList) return [];
+
+    return tasksList
+    .filter((task) =>
       task.title.toLowerCase().includes(search.toLowerCase())
-    ).filter((task) =>
+    )
+    .filter((task) =>
       statusFilter === "all" ? true : task.status === statusFilter
     )
     .filter((task) =>
@@ -158,6 +180,7 @@ const useTaskPage = () => {
     setPriorityFilter,
     statusOptions,
     priorityOptions,
+    getTaskError,
   };
 };
 
