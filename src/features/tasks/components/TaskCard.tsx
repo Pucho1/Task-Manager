@@ -11,15 +11,13 @@ type Props = {
 };
 
 const TaskCard = ({ task, openEditModal, onDelete }: Props) => {
-  const { getPriorityColor, getStatusColor, onChangeStatus, getNextStatus } =
-    useTaskCard();
-  const titleId = `task-title-${task.id}`;
+  const { getPriorityColor, getStatusColor, onChangeStatus, getNextStatus } = useTaskCard();
 
   return (
-    <li className="list-none">
+    <li className="list-none h-full">
       <article
-        className="flex flex-row bg-white rounded-xl shadow-md border border-gray-200 mb-4 hover:shadow-lg transition-shadow duration-200"
-        aria-labelledby={titleId}
+        className="flex flex-row bg-white rounded-xl h-full shadow-md border border-gray-200 mb-4 hover:shadow-lg transition-shadow duration-200"
+        aria-labelledby={`task-title-${task.id}`}
       >
         <div className={`flex flex-col flex-none w-14 ${getPriorityColor(task.priority)} p-1 rounded-xl`}>
           <div>
@@ -38,14 +36,14 @@ const TaskCard = ({ task, openEditModal, onDelete }: Props) => {
         <div className="flex flex-col flex-1 p-4 w-60">
           <div className="flex items-start justify-between mb-3">
             <div className="flex-1 min-w-0">
-              <h3 id={titleId} className="text-lg font-semibold text-gray-900 truncate mb-1">
+              <h3 id={`task-title-${task.id}`} className="text-lg font-semibold text-gray-900 truncate mb-1">
                 {task.title}
               </h3>
             </div>
           </div>
 
           {task.description && (
-            <p className="text-gray-600 text-sm mb-4 leading-relaxed">
+            <p className="text-gray-600 text-sm mb-4 leading-relaxed h-[50%] overflow-y-auto">
               {task.description}
             </p>
           )}
