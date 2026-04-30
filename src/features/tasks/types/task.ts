@@ -18,4 +18,4 @@ export interface FilterOption {
   label: string;
 };
 
-export type TaskInput = Omit<Task, "id" | "createdAt" | "updatedAt" | "status">;
+export type TaskInput = Omit<Task, "id" | "createdAt" | "updatedAt">;

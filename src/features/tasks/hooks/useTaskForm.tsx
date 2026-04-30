@@ -33,6 +33,7 @@ const useTaskForm = ({ mode, task, onSubmit }: Props) => {
       title,
       description,
       priority,
+			status,
     });
   };
   
