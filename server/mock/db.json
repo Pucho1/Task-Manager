@@ -13,10 +13,10 @@
       "id": "5",
       "title": "Limpiar la casa",
       "description": "Aspirar, fregar el suelo y limpiar el baño",
-      "priority": "medium",
+      "priority": "high",
       "status": "in_progress",
       "createdAt": "2026-04-22T09:00:00.000Z",
-      "updatedAt": "2026-04-22T11:00:00.000Z"
+      "updatedAt": "2026-05-01T10:38:19.010Z"
     },
     {
       "id": "6",

@@ -13,7 +13,7 @@ const Menucard = ({ onEdit, onDelete, taskTitle }: Props) => {
       <div className="relative h-full">
         <MenuButton
           type="button"
-          className="h-full w-full flex items-center justify-center text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-colors duration-200"
+          className="h-full w-full flex items-center justify-center text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-colors duration-200 dark:hover:text-blue-400 dark:hover:bg-gray-700"
           aria-label={`Menu de opciones para ${taskTitle}`}
         >
           <EllipsisVertical aria-hidden="true" focusable="false" />
@@ -21,14 +21,14 @@ const Menucard = ({ onEdit, onDelete, taskTitle }: Props) => {
 
         <MenuItems
           transition
-          className="absolute w-15 -ml-5 origin-top-right top-0 rounded-xl p-1 text-sm/6 text-black transition duration-100 ease-out focus:outline-none data-closed:scale-95 data-closed:opacity-0"
+          className="absolute w-15 -ml-5 origin-top-right top-0 rounded-xl p-1 text-sm/6 text-black transition duration-100 ease-out focus:outline-none data-closed:scale-95 data-closed:opacity-0 dark:text-gray-200"
         >
           <div className="flex flex-row gap-1">
             <MenuItem>
               <button
                 type="button"
                 onClick={onEdit}
-                className="p-1.5 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-colors duration-200"
+                className="p-1.5 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-colors duration-200 dark:hover:text-blue-400 dark:hover:bg-gray-700"
                 aria-label={`Editar tarea ${taskTitle}`}
               >
                 <svg
@@ -53,7 +53,7 @@ const Menucard = ({ onEdit, onDelete, taskTitle }: Props) => {
               <button
                 type="button"
                 onClick={onDelete}
-                className="p-1.5 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-md transition-colors duration-200"
+                className="p-1.5 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-md transition-colors duration-200 dark:hover:text-red-400 dark:hover:bg-gray-700"
                 aria-label={`Eliminar tarea ${taskTitle}`}
               >
                 <svg
