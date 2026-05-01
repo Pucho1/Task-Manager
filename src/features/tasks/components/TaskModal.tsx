@@ -18,17 +18,17 @@ export default function TaskModal(	{ isOpen,	onClose, mode, task, onSubmit }: 	P
       <div className="fixed inset-0 bg-black/30" />
 
       <div className="fixed inset-0 flex items-center justify-center p-4">
-        <DialogPanel className="bg-white rounded-lg p-6 w-full max-w-md">
-          <DialogTitle className="text-lg font-semibold mb-4 text-black">
-            <p className="text-black">{mode === "create" ? "Nueva tarea" : "Editar tarea"}</p>
+        <DialogPanel className="bg-white rounded-lg p-6 w-full max-w-md dark:bg-gray-800">
+          <DialogTitle className="text-lg font-semibold mb-4 text-black dark:text-gray-200">
+            <p className="text-black dark:text-gray-200">{mode === "create" ? "Nueva tarea" : "Editar tarea"}</p>
           </DialogTitle>
 
-        <TaskForm
-          mode={mode}
-          task={task}
-          onSubmit={onSubmit}
-          onCancel={onClose}
-        />
+          <TaskForm
+            mode={mode}
+            task={task}
+            onSubmit={onSubmit}
+            onCancel={onClose}
+          />
         
         </DialogPanel>
       </div>

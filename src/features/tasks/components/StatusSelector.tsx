@@ -24,7 +24,7 @@ const StatusSelector = ({ value, onChange }: Props) => {
           <label
             key={option.value}
             className={`flex flex-col sm:flex-row w-1/3 items-center gap-2 px-3 py-2 rounded-lg border cursor-pointer transition
-              ${isSelected ? "bg-blue-50 border-blue-500 text-blue-600" : "bg-white border-gray-200 text-gray-600 hover:bg-gray-50"}
+              ${isSelected ? "bg-blue-50 border-blue-500 text-blue-600 dark:bg-blue-600 dark:border-blue-500 dark:text-blue-300" : "bg-white border-gray-200 text-gray-600 hover:bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300"}
             `}
           >
             <input
