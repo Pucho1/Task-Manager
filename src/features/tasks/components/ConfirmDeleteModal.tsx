@@ -13,8 +13,8 @@ const ConfirmDeleteModal = ({ task, onCancel, onConfirm, isLoading }: Props) => 
       <div className="fixed inset-0 bg-black/30" />
 
       <div className="fixed inset-0 flex items-center justify-center p-2">
-        <DialogPanel className="flex flex-col bg-white rounded-lg p-3 w-full max-w-sm gap-8">
-          <DialogTitle className="text-lg font-semibold text-black">
+        <DialogPanel className="flex flex-col bg-white rounded-lg p-3 w-full max-w-sm gap-8 dark:bg-gray-800">
+          <DialogTitle className="text-lg font-semibold text-black dark:text-gray-200">
             Confirmar eliminacion
           </DialogTitle>
 
