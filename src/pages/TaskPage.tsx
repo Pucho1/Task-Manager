@@ -10,6 +10,7 @@ import ErrorFetch          from "../features/tasks/components/ErrorFetch";
 import Empty               from "../features/tasks/components/Empty";
 import GridTask            from "../features/tasks/components/GridTask";
 
+
 const TaskPage = () => {
 
   const {
@@ -37,6 +38,8 @@ const TaskPage = () => {
     statusOptions,
     priorityOptions,
     getTaskError,
+    theme,
+    setTheme,
   } = useTaskPage();
  
   if(isLoading){
@@ -49,13 +52,21 @@ const TaskPage = () => {
 
 
   return (
-    <main className="min-h-screen bg-gray-100">
+    <main className="min-h-screen bg-gray-100 text-gray-900 transition-colors dark:bg-gray-900 dark:text-gray-100">
       
-      <Header onCreate={openCreate} search={search} setSearch={setSearch} />
+      <Header 
+        onCreate={openCreate} 
+        search={search} 
+        setSearch={setSearch} 
+        theme={theme} 
+        toggleTheme={() =>
+          setTheme((prev) => (prev === "dark" ? "light" : "dark"))
+        }
+      />
 
       <StickyNavbar onCreate={openCreate} />
 
-      <section className="relative mx-auto -mt-24 bg-white rounded-t-[40px] p-8 shadow-2xl min-h-[calc(100vh-150px)]">
+      <section className="relative mx-auto -mt-24 bg-white rounded-t-[40px] p-8 shadow-2xl min-h-[calc(100vh-150px)] transition-colors dark:bg-gray-800">
         
         <div className="flex gap-2 mb-4 w-full items-end">
           <FilterTask
@@ -90,9 +101,9 @@ const TaskPage = () => {
           <Empty />
         ) : 
           <GridTask 
-            filteredTasks={filteredTasks} 
-            openEdit={openEdit} 
-            handleAskDelete={handleAskDelete} 
+            filteredTasks={filteredTasks}
+            openEdit={openEdit}
+            handleAskDelete={handleAskDelete}
           />
         }
 

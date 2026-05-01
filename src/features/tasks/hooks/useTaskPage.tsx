@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import { useTasksData } 				                      from "./useTasksData";
 import type { Priority, Task, TaskInput, TaskStatus } from "../types/task";
@@ -13,6 +13,19 @@ const useTaskPage = () => {
   const [search, setSearch]                 = useState("");
   const [statusFilter, setStatusFilter]     = useState<"all" | TaskStatus>("all");
   const [priorityFilter, setPriorityFilter] = useState<"all" | Priority>("all");
+  const [theme, setTheme]                   = useState(localStorage.getItem("theme") || "light");
+
+  useEffect(() => {
+    const root = document.documentElement;
+
+    if (theme === "dark") {
+      root.classList.add("dark");
+    } else {
+      root.classList.remove("dark");
+    }
+
+    localStorage.setItem("theme", theme);
+  }, [theme]);
 
   const { 
     tasksList,
@@ -181,6 +194,8 @@ const useTaskPage = () => {
     statusOptions,
     priorityOptions,
     getTaskError,
+    theme,
+    setTheme,
   };
 };
 

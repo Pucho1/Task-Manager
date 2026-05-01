@@ -16,7 +16,7 @@ const TaskCard = ({ task, openEditModal, onDelete }: Props) => {
   return (
     <li className="list-none h-full">
       <article
-        className="flex flex-row bg-white rounded-xl h-full shadow-md border border-gray-200 mb-4 hover:shadow-lg transition-shadow duration-200 overflow-hidden"
+        className="flex flex-row bg-white rounded-xl h-full shadow-md border border-gray-200 mb-4 hover:shadow-lg transition-shadow duration-200 overflow-hidden dark:border-gray-700 dark:bg-gray-800"
         aria-labelledby={`task-title-${task.id}`}
       >
         <div className={`flex flex-col flex-none w-14 ${getPriorityColor(task.priority)} p-1 rounded-xl`}>
@@ -36,20 +36,20 @@ const TaskCard = ({ task, openEditModal, onDelete }: Props) => {
         <div className="flex flex-col flex-1 p-4 min-w-0">
           <div className="flex items-start mb-3">
             <div className="flex-1 min-w-0">
-              <h3 id={`task-title-${task.id}`} className="text-lg font-semibold text-gray-900 truncate block mb-1 w-full">
+              <h3 id={`task-title-${task.id}`} className="text-lg font-semibold text-gray-900 truncate block mb-1 w-full dark:text-gray-100">
                 {task.title}
               </h3>
             </div>
           </div>
 
           {task.description && (
-            <p className="text-gray-600 text-sm mb-4 leading-relaxed line-clamp-2">
+            <p className="text-gray-600 text-sm mb-4 leading-relaxed line-clamp-2 dark:text-gray-300">
               {task.description}
             </p>
           )}
 
           <div className="flex items-end justify-end mt-4">
-            <span className="text-xs text-gray-500">
+            <span className="text-xs text-gray-500 dark:text-gray-400">
               <button
                 type="button"
                 onClick={() => onChangeStatus(task)}

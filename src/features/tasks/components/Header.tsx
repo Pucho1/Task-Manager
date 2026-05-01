@@ -6,13 +6,15 @@ type Props = {
   onCreate: () => void;
   search: string;
   setSearch: (value: string) => void;
+  theme: string;
+  toggleTheme: () => void;
 };
 
-const Header = ({ onCreate, search, setSearch }: Props) => {
+const Header = ({ onCreate, search, setSearch, theme, toggleTheme }: Props) => {
 	const { ref } = useHeaderTask();
 
   return (
-    <header ref={ref} className="bg-indigo-700 h-70 p-3">
+    <header ref={ref} className="bg-indigo-700 h-70 p-3 dark:bg-gray-900">
 			{/* Hero */}
 			<div className="flex flex-col sm:flex-row items-center justify-between p-3">
 
@@ -33,6 +35,14 @@ const Header = ({ onCreate, search, setSearch }: Props) => {
 						>
 							<Plus size={20} />
 							Add
+						</button>
+
+						<button
+							onClick={toggleTheme}
+							aria-label="Cambiar tema"
+							className="text-white text-xl"
+							>
+							{theme === "dark" ? "☀️" : "🌙"}
 						</button>
 					</div>
 				</nav>
