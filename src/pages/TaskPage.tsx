@@ -41,15 +41,6 @@ const TaskPage = () => {
     theme,
     setTheme,
   } = useTaskPage();
- 
-  if(isLoading){
-    return(<Skeleton />);
-  };
-
-  if(getTaskError){
-    return( <ErrorFetch /> );
-  };
-
 
   return (
     <main className="min-h-screen bg-gray-100 text-gray-900 transition-colors dark:bg-gray-900 dark:text-gray-100">
@@ -96,6 +87,18 @@ const TaskPage = () => {
             )}    
           </div>
         </div>
+
+        {
+          isLoading && (
+            <div className="w-full">
+              <Skeleton />
+            </div>
+          )
+        }
+
+        { getTaskError && (
+          <ErrorFetch />
+        )}
 
         {filteredTasks.length === 0 ? (
           <Empty />
